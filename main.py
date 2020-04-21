@@ -9,14 +9,12 @@ lista_caracteres_importados = [letras_lower,letras_upper,pontuacoes,numeros]
 
 lista_com_os_caracteres = []
 
-guarda_caracteres_diferenciados = []
-
 def mensagem_inicial_pedindo_input():
   
   global input_do_usuario_p_gerar_senha
 
   print("Para sair digite 0")
-  print("Para uma senha mais diferenciada digite 7")
+  print("Para uma senha mais diferenciada digite 2")
   input_do_usuario_p_gerar_senha = int(input("Digite 1 para gerar uma senha rápida: "))
 
 def gera_e_imprime_senha_rapida():
@@ -37,7 +35,7 @@ def gera_e_imprime_senha_rapida():
 
 def gera_e_imprime_senha_diferenciada():
 
-  if input_do_usuario_p_gerar_senha == 7:
+  if input_do_usuario_p_gerar_senha == 2:
   
     while True:
       
@@ -70,12 +68,18 @@ def pede_inputs_diferenciados_e_soma_os_mesmos():
   soma_dos_inputs = input_usuario_quant_n_da_senha + input_usuario_quant_letras_da_senha + input_usuario_quant_pontuacao_da_senha
 
 def gera_senha_diferenciada():
+  
+  global guarda_caracteres_diferenciados
+  
   lista_inputs_p_senha_diferenciada = [
     input_usuario_quant_n_da_senha,
     input_usuario_quant_letras_da_senha,
     input_usuario_quant_pontuacao_da_senha]
   
   contador_p_iteracao = 0 # isso deve ser relido como '0' msm
+
+  guarda_caracteres_diferenciados = []
+
 
   for item in [numeros,letras_lower_e_upper,pontuacoes]:
 
@@ -117,6 +121,8 @@ while True:
 
     if input_do_usuario_p_gerar_senha == 0: break
 
+    if input_do_usuario_p_gerar_senha > 2 or input_do_usuario_p_gerar_senha < 0: raise ValueError
+
     for item in lista_caracteres_importados:
       lista_com_os_caracteres += item
     
@@ -125,6 +131,6 @@ while True:
     gera_e_imprime_senha_diferenciada()
   
   except ValueError:
-    print("\nSe atenha aos numeros dos anunciados, Não digite outros valores!\n")
+    print("\nEntrada invalida!\n")
 
 print("\nGerador de senhas fechado.")
